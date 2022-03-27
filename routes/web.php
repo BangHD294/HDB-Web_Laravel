@@ -24,30 +24,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //admin______________________________________________
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
 
-    Route::get('/dashboard',[App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+
 });
 Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'User', 'middleware' => ['auth', 'user']], function () {
 
-    Route::get('/dashboard',[App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
 });
-
-
-//Route::middleware(['auth', 'admin'])->group(function () {
-//    Route::get('/dashboard', [
-//        'as' => 'admin.dashboard',
-//        'uses' => [DashboardController::class, 'login'],
-//    ]);
-//});
-//
-//
-//Route::middleware(['auth', 'user'])->group(function () {
-//    Route::get('/dashboard', [
-//        'as' => 'user.dashboard',
-//        'uses' => [DashboardController::class, 'login'],
-//    ]);
-//});
-
 
 
 //Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
