@@ -52,7 +52,7 @@
 <body>
 <!-- Left Panel -->
 
-{{--@include('layouts.backend.partials.navbar')--}}
+@include('layouts.backend.partials.navbar')
 <!-- /#left-panel -->
 
 <!-- Left Panel -->
@@ -61,7 +61,7 @@
 
 <div id="right-panel" class="right-panel">
     <!-- Header-->
-{{--@include('layouts.backend.partials.headermenu')--}}
+@include('layouts.backend.partials.headermenu')
 <!-- /header -->
     <!-- Header-->
 
