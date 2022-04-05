@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
-use App\Models\Role;
-use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Brian2694\Toastr\Facades\Toastr;
-class UserController extends Controller
+
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = user::all();
-        $roles = Role::all();
-        return view('admin.users.index', compact('users', 'roles'));
+        $categories = Category::all();
+        return view('admin.category.index', compact(categories));
     }
 
     /**
@@ -75,18 +71,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $user = User::findOrFail($id);
-        if (Auth::user()->id == $id) {
-            Toastr::warning('Admin Can not changed role themselves !!');
-            return redirect()->back();
-        }
-        $user->role_id = $request->role;
-        $user->save();
-        Toastr::success('Role changed successfully !');
-        return redirect()->back();
-
-
+        //
     }
 
     /**
@@ -97,12 +82,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        if (Auth::user()->id == $id) {
-            return redirect()->back();
-        }
-        $user->delete();
-        return redirect()->back();
-
+        //
     }
 }

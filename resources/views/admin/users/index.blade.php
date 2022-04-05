@@ -168,7 +168,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{route('admin.user.update', $user->id)}}" method="post" id="editUser-{{$user->id}}" enctype="multipart/form-data" class="form-horizontal">
+                                    <form action="{{route('admin.users.update', $user->id)}}" method="post" id="editUser-{{$user->id}}" enctype="multipart/form-data" class="form-horizontal">
                                         @csrf
                                         @method('PUT')
                                         <div class="row form-group">
@@ -195,6 +195,7 @@
                                                             <label for="radio1" class="form-check-label ">
                                                                 <input type="radio" id="radio1" name="role" value="{{$role->id}}"
                                                                        class="form-check-input" {{$user->role->id == $role->id ? 'checked' : "" }}>{{$role->name}}
+
                                                             </label>
                                                         </div>
                                                     @endforeach
@@ -230,7 +231,8 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                     <button type="button" class="btn btn-danger" onclick="event.preventDefault();
                                         document.getElementById('deleteUser-{{$user->id}}').submit();">Confirm</button>
-                                    <form action="{{route('admin.user.destroy', $user->id)}}" style="display: none" id="deleteUser-{{$user->id}}" method="POST">
+{{--                                    <form action="{{route('admin.user.destroy', $user->id)}}" style="display: none" id="deleteUser-{{$user->id}}" method="POST">--}}
+                                    <form action="{{route('admin.users.destroy', $user->id)}}" style="display: none" id="deleteUser-{{$user->id}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                     </form>
@@ -245,7 +247,7 @@
             </div>
 
 
-            <!-- .content -->
+{{--            <!-- .content -->--}}
             @endsection
 
             @push('footer')

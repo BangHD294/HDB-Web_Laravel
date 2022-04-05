@@ -26,9 +26,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', 'admin']], function () {
 
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('user', UserController::class)->except([
-        'create', 'store', 'update', 'destroy'
-    ]);
+    Route::resource('users', UserController::class);
+    Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class);
 });
 
 //route user_______________________________________________
