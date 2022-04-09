@@ -26,8 +26,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', 'admin']], function () {
 
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('users', UserController::class);
-    Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('users', UserController::class)->except(['create', 'show', 'edit', 'store']);
+    Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class)->except(['create', 'show', 'edit']);
+    Route::resource('post', \App\Http\Controllers\Admin\PostController::class);
+//    ->except(['create', 'show', 'edit']);
 });
 
 //route user_______________________________________________

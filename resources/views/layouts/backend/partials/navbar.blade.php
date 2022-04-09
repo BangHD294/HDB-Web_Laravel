@@ -36,6 +36,18 @@
                             <i class="menu-icon fa fa-file"></i>Users
                         </a>
                     </li>
+                    {{--category--}}
+                    <li class="active">
+                        <a href="{{route('admin.category.index')}}">
+                            <i class="menu-icon fa fa-file"></i>Category
+                        </a>
+                    </li>
+                    {{--post--}}
+                    <li class="active">
+                        <a href="{{route('admin.post.index')}}">
+                            <i class="menu-icon fa fa-file"></i>Post
+                        </a>
+                    </li>
                 </ul>
         </div>
         <!-- /.navbar-collapse -->

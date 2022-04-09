@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
 {
@@ -16,7 +20,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('admin.category.index', compact(categories));
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -37,7 +41,33 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255|unique:categories',
+            'description' => 'sometimes|max:1000',
+            'image' => 'required|image|mimes:jpg,png,bmp,jpeg'
+        ]);
+        // Image
+        $image = $request->image;
+        $imageName = Str::slug($request->name, '-') . uniqid() . '.' . $image->getClientOriginalExtension();
+
+        if (!Storage::disk('public')->exists('category')) {
+            Storage::disk('public')->makeDirectory('category');
+        }
+
+//        $categoryImg = Image::make($image)->resize(640, null, function ($constraint) {
+//            $constraint->aspectRatio();
+//            $constraint->upsize();
+//        })->stream();
+        $image->storeAs('category', $imageName, 'public');
+//        Storage::disk('public')->put('category/' . $imageName, $categoryImg); //The put method may be used to store raw file contents on a disk
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name, '-');
+        $category->description = $request->description;
+        $category->image = $imageName;
+        $category->save();
+        Toastr::success('Category created successfully');
+        return redirect()->back();
     }
 
     /**
@@ -71,7 +101,53 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if ($request->name == Category::findOrFail($id)->name) {
+            $this->validate($request, [
+                'name' => 'required|max:255',
+                'description' => 'sometimes|max:1000',
+                'image' => 'sometimes|image|mimes:jpg,bmp,png,jpeg'
+
+            ]);
+        } else {
+            $this->validate($request, [
+                'name' => 'required|max:255|unique:categories',
+                'description' => 'sometimes|max:1000',
+                'image' => 'sometimes|image|mimes:jpg,bmp,png,jpeg'
+
+            ]);
+        }
+
+        $category = Category::findOrFail($id);
+        if ($request->image != null) {
+            // Image
+            $image = $request->image;
+            $imageName = Str::slug($request->name, '-') . uniqid() . '.' . $image->getClientOriginalExtension();
+
+            if (!Storage::disk('public')->exists('category')) {
+                Storage::disk('public')->makeDirectory('category');
+            }
+            // Delete old Image
+            if (Storage::disk('public')->exists('category/' . $category->image)) {
+                Storage::disk('public')->delete('category/' . $category->image);
+            }
+            // Store
+            // $image->storeAs('category', $imageName, 'public');
+            $categoryImg = Image::make($image)->resize(640, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->stream();
+            Storage::disk('public')->put('category/' . $imageName, $categoryImg); //The put method may be used to store raw file contents on a disk
+        } else {
+            $imageName = $category->image;
+        }
+
+        $category->name = $request->name;                  // Php Js Html
+        $category->slug = Str::slug($request->name, '-'); // php-js-html
+        $category->description = $request->description;
+        $category->image = $imageName;
+        $category->save();
+        Toastr::success('Category updated successfully');
+        return redirect()->back();
     }
 
     /**
@@ -82,6 +158,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        Storage::disk('public')->delete('category/' . $category->image);
+        $category->delete();
+        Toastr::success('Category deleted successfully');
+        return redirect()->back();
     }
 }
