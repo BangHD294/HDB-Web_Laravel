@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use PhpParser\Comment;
 
-class Category extends Model
+class Tag extends Model
 {
     use HasFactory;
+    protected $fillable = ['name'];
+    public $timestamps = false;
     public function post()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Post::class, 'postID', 'id');
     }
 }

@@ -78,6 +78,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="textarea-input" class=" form-control-label">Body [ for embedde google drive image use :  https://drive.google.com/uc?export=view&id=file_id ]</label>
+{                                                                                                                                           {--https://drive.google.com/drive/folders/1oYAqov3YCgv-NXRGH8mMcOj0KcU0blFf?usp=sharing--}}
                                         <textarea name="body" id="summernote" rows="9" placeholder="Content..." class="form-control"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary">
