@@ -27,11 +27,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', '
 
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [App\Http\Controllers\Admin\DashboardController::class, 'showProfile'])->name('profile');
-    Route::put('/profile', [App\Http\Controllers\Admin\DashboardController::class, 'updateProfile'])->name('profile.updateProfile');
+    Route::put('/profile', [App\Http\Controllers\Admin\DashboardController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/profile/password', [App\Http\Controllers\Admin\DashboardController::class, 'changePassword'])->name('profile.password');
     Route::resource('users', UserController::class)->except(['create', 'show', 'edit', 'store']);
     Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class)->except(['create', 'show', 'edit']);
     Route::resource('post', \App\Http\Controllers\Admin\PostController::class);
 //    ->except(['create', 'show', 'edit']);
+//    Route::get('profile', 'DashboardController@showProfile')->name('profile');
+//    Route::put('profile', 'DashboardController@updateProfile')->name('profile.update');
+//    Route::put('profile/password', 'DashboardController@changePassword')->name('profile.password');
 });
 
 //route user_______________________________________________

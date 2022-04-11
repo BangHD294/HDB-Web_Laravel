@@ -47,10 +47,8 @@
             </div>
             <div class="card-body">
                 <div class="mx-auto d-block">
-{{--                    <img class="rounded-circle mx-auto d-block" src="{{asset('storage/user/'.$user->image)}}" alt="Card image cap">--}}
-{{--                    <h5 class="text-sm-center mt-2 mb-1">{{$user->name}}</h5>--}}
-                    <img class="rounded-circle mx-auto d-block" src="" alt="Card image cap">
-                    <h5 class="text-sm-center mt-2 mb-1"></h5>
+                    <img class="rounded-circle mx-auto d-block" src="{{asset('storage/user/'.$user->image)}}" alt="Card image cap">
+                    <h5 class="text-sm-center mt-2 mb-1">{{$user->name}}</h5>
                 </div>
                 <hr>
             </div>
@@ -71,8 +69,8 @@
                         </nav>
                         <div class="tab-content pl-3 pt-2" id="nav-tabContent">
                             <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-{{--                                <form action="{{route('admin.profile.update')}}" method="POST" enctype="multipart/form-data" class="form-horizontal">--}}
-                                <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="{{route('admin.profile.update')}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+{{--                                <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal">--}}
                                     @csrf()
                                     @method('PUT')
                                     <div class="row form-group">
@@ -104,8 +102,8 @@
                                 </form>
                             </div>
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-{{--                                <form action="{{route('admin.profile.password')}}" method="POST" enctype="multipart/form-data" class="form-horizontal">--}}
-                                <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                                <form action="{{route('admin.profile.password')}}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+{{--                                <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal">--}}
                                     @csrf
                                     @method('PUT')
                                 <div class="row form-group">
