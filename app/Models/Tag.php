@@ -10,6 +10,7 @@ class Tag extends Model
     use HasFactory;
     protected $fillable = ['name'];
     public $timestamps = false;
+
     public function post()
     {
         return $this->belongsTo(Post::class, 'postID', 'id');

@@ -93,8 +93,8 @@ class PostController extends Controller
             }
         }
         $tags = [];
-//        $stingTags = array_map('trim', explode(',', $request->tags));
-        $stingTags = explode(',', $request->tags);
+        $stingTags = array_map('trim', explode(',', $request->tags));
+//        $stingTags = explode(',', $request->tags);
         foreach ($stingTags as $tag) {
             array_push($tags, ['name' => $tag]);
         }

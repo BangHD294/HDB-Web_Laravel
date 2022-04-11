@@ -27,9 +27,8 @@
 
                 <div class="user-menu dropdown-menu">
                     @if (Auth::user()->role->id == 1)
-{{--                        <a class="nav-link" href="{{route('admin.profile')}}"--}}
-                        ><i class="fa fa-user"></i> My Profile</a
-{{--                        >--}}
+                        <a class="nav-link" href="{{route('admin.profile')}}">
+                            <i class="fa fa-user"></i> My Profile</a>
                     @elseif(Auth::user()->role->id == 2)
                         <a class="nav-link" href="{{route('user.profile')}}"
                         ><i class="fa fa-user"></i> My Profile</a
