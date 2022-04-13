@@ -14,13 +14,15 @@ use App\Http\Controllers\Admin\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/posts', [App\Http\Controllers\HomeController::class, 'posts'])->name('posts');
+Route::get('/post/{id}', [App\Http\Controllers\HomeController::class, 'post'])->name('post');
 
 //route admin______________________________________________
 Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', 'admin']], function () {
@@ -32,10 +34,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', '
     Route::resource('users', UserController::class)->except(['create', 'show', 'edit', 'store']);
     Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class)->except(['create', 'show', 'edit']);
     Route::resource('post', \App\Http\Controllers\Admin\PostController::class);
-//    ->except(['create', 'show', 'edit']);
-//    Route::get('profile', 'DashboardController@showProfile')->name('profile');
-//    Route::put('profile', 'DashboardController@updateProfile')->name('profile.update');
-//    Route::put('profile/password', 'DashboardController@changePassword')->name('profile.password');
+
 });
 
 //route user_______________________________________________

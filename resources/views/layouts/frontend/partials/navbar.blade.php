@@ -10,10 +10,10 @@
 
               <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                 <ul class="navbar-nav scrollable-menu">
-                    <li><a href="/">Trang chủ</a></li>
-                    <li><a href="/posts">Bài viết</a></li>
-                        <li><a href="/categories">Thể loại</a></li>
-                    <li><a href="/#about">Về tôi</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/posts">Posts</a></li>
+                        <li><a href="/categories">Categories</a></li>
+                    <li><a href="/#about">About</a></li>
                     @if (Route::has('đăng nhập'))
                     @auth
                         <!-- Dropdown -->

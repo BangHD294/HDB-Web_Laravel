@@ -66,7 +66,10 @@
       <div class="item single-cat">
         <img src="{{asset('storage/post/'.$post->image)}}" alt="{{$post->image}}" />
         <p class="date">{{$post->created_at->diffForHumans()}}</p>
-        <h4><a href="{{route('post', $post->slug)}}">{{$post->title}}</a></h4>
+{{--        <h4><a href="{{route('post', $post->slug)}}">{{$post->title}}</a></h4>--}}
+          <img src="" alt="" />
+          <p class="date"></p>
+          <h4><a href=""></a></h4>
       </div>
       @endforeach
     </div>
@@ -91,18 +94,23 @@
                     <img class="img-fluid " src="{{asset('storage/post/'.$post->image)}}" alt="{{$post->image}}">
                     <div class="date mt-20 mb-20">{{$post->created_at->diffForHumans()}}</div>
                     <div class="detail">
-                        <a href="{{route('post', $post->slug)}}"><h4 class="pb-20">{{$post->title}}</h4></a>
+{{--                        <a href="{{route('post', $post->slug)}}"><h4 class="pb-20">{{$post->title}}</h4></a>--}}
+                        <a href=""><h4 class="pb-20">{{$post->title}}</h4></a>
+                        <a href=""><h4 class="pb-20"></h4></a>
                         <p>
                            {!! Str::limit($post->body, 400) !!}
                         </p>
                         <p class=" footer"="">
                             <br>
                             </p><ul class="d-flex space-around">
-                                <li><a href="javascript:void(0);" onclick=" toastr.info('To add to your favorite list you have to login first.', 'Info', { closeButton: true, progressBar: true, })"><i class="fa fa-heart-o" aria-hidden="true"></i><span> {{$post->likedUsers->count()}}</span></a></li>
+{{--                                <li><a href="javascript:void(0);" onclick=" toastr.info('To add to your favorite list you have to login first.', 'Info', { closeButton: true, progressBar: true, })"><i class="fa fa-heart-o" aria-hidden="true"></i><span> {{$post->likedUsers->count()}}</span></a></li>--}}
+                                <li><a href="javascript:void(0);" onclick=" toastr.info('To add to your favorite list you have to login first.', 'Info', { closeButton: true, progressBar: true, })"><i class="fa fa-heart-o" aria-hidden="true"></i><span></span></a></li>
 
 
-                            <li><i class="fa fa-comment-o" aria-hidden="true"></i><span> {{$post->comments->count()}}</span></li>
-                                <li><i class="fa fa-eye" aria-hidden="true"></i> <span>{{$post->view_count}}</span></li>
+{{--                            <li><i class="fa fa-comment-o" aria-hidden="true"></i><span> {{$post->comments->count()}}</span></li>--}}
+{{--                                <li><i class="fa fa-eye" aria-hidden="true"></i> <span>{{$post->view_count}}</span></li>--}}
+                            <li><i class="fa fa-comment-o" aria-hidden="true"></i><span> </span></li>
+                            <li><i class="fa fa-eye" aria-hidden="true"></i> <span></span></li>
                             </ul>
 
                     <p></p>
@@ -148,11 +156,12 @@
                 <div class="row">
                     <div class="single-team">
                         <div class="thumb">
-                            @foreach($users as $item)
-                                @if($item->role_id == 1)
-                            <img class="img-fluid w-75 mx-auto" src="{{asset('storage/user/'.$item->image)}}" alt="admin">
-                                @endif
-                            @endforeach
+{{--                            @foreach($users as $item)--}}
+{{--                                @if($item->role_id == 1)--}}
+{{--                            <img class="img-fluid w-75 mx-auto" src="{{asset('storage/user/'.$item->image)}}" alt="admin">--}}
+                            <img class="img-fluid w-75 mx-auto" src="" alt="admin">
+{{--                                @endif--}}
+{{--                            @endforeach--}}
                             <div class="align-items-center justify-content-center d-flex">
                                 <a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
                                 <a href="#"><i class="fab fa-youtube" aria-hidden="true"></i></a>
