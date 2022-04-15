@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Egulias\EmailValidator\Warning\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,5 +22,22 @@ class Post extends Model
     public function tags()
     {
         return $this->hasMany(Tag::class, 'postID', 'id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    // Define Scope
+    // published()
+    public function scopePublished($query)
+    {
+        return $query->where('status', 1);
+    }
+
+    // many to many
+    public function likedUsers()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

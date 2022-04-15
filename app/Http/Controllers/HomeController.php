@@ -17,35 +17,27 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        $posts = Post::latest()->take(6)->get();
+        $posts = Post::latest()->take(6)->published()->get();
         $users = User::all();
         return view('index', compact('posts', 'users'));
-        return view('index');
     }
     public function posts()
     {
-//        $posts = Post::latest()->published()->paginate(10);
-        $posts = Post::latest()->paginate(10);
-//        $posts = Post::all();
+        $posts = Post::latest()->published()->paginate(10);
         return view('posts', compact('posts'));
     }
     public function post($slug)
     {
-//        $post = Post::where('slug', $slug)->published()->first();
-        $post = Post::where('slug', $slug)->first();
-
+        $post = Post::where('slug', $slug)->published()->first();
+        // $posts = Post::latest()->take(3)->published()->get();
+        // Increase View count
         $postKey = 'post_'.$post->id;
         if(!Session::has($postKey)){
             $post->increment('view_count');
@@ -54,37 +46,36 @@ class HomeController extends Controller
 
         return view('post', compact('post'));
     }
-//    public function categories()
-//    {
-//        $categories = Category::all();
-//        return view('categories', compact('categories'));
-//    }
-//    public function categoryPost($slug)
-//    {
-//        $category = Category::where('slug', $slug)->first();
-////        $posts = $category->posts()->published()->paginate(10);
-//        $posts = $category->posts()->paginate(10);
-//
-//        return view('categoryPost', compact('posts'));
-//    }
-//    public function search(Request $request)
-//    {
-//        $this->validate($request, ['search' => 'required|max:255']);
-//        $search = $request->search;
-//        $posts = Post::where('title', 'like', "%$search%")->paginate(10);
-//        $posts->appends(['search' => $search]);
-//
-//        // $categories = Category::all();
-//        return view('search', compact('posts', 'search'));
-//    }
-//    public function tagPosts($name)
-//    {
-//        $query = $name;
-//        $tags = Tag::where('name', 'like', "%$name%")->paginate(10);
-//        $tags->appends(['search' => $name]);
-//
-//        return view('tagPosts', compact('tags', 'query'));
-//    }
+    public function categories()
+    {
+        $categories = Category::all();
+        return view('categories', compact('categories'));
+    }
+    public function categoryPost($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+        $posts = $category->posts()->published()->paginate(10);
+
+        return view('categoryPost', compact('posts'));
+    }
+    public function search(Request $request)
+    {
+        $this->validate($request, ['search' => 'required|max:255']);
+        $search = $request->search;
+        $posts = Post::where('title', 'like', "%$search%")->paginate(10);
+        $posts->appends(['search' => $search]);
+
+        // $categories = Category::all();
+        return view('search', compact('posts', 'search'));
+    }
+    public function tagPosts($name)
+    {
+        $query = $name;
+        $tags = Tag::where('name', 'like', "%$name%")->paginate(10);
+        $tags->appends(['search' => $name]);
+
+        return view('tagPosts', compact('tags', 'query'));
+    }
 //    public function likePost($post){
 //        // Check if user already liked the post or not
 //        $user = Auth::user();
