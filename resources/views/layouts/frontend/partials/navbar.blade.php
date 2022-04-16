@@ -10,11 +10,11 @@
 
             <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
                 <ul class="navbar-nav scrollable-menu">
-                    <li><a href="/">Trang chủ</a></li>
-                    <li><a href="/posts">Bài viết</a></li>
-                    <li><a href="/categories">Thể loại</a></li>
-                    <li><a href="/#about">Về tôi</a></li>
-                @if (Route::has('đăng nhập'))
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/posts">Posts</a></li>
+                    <li><a href="/categories">Categories</a></li>
+                    <li><a href="/#about">about</a></li>
+                @if (Route::has('login'))
                     @auth
                         <!-- Dropdown -->
                             <li class="dropdown">
@@ -22,6 +22,7 @@
                                     <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;
                                 </a>
                                 <div class="dropdown-menu menu1" style="display: none" id="dropMenu">
+<!--                                    --><?php //dd(Auth::user()->role->id == 1) ?>
                                     @if (Auth::user()->role->id == 1)
                                         <a href="{{route('admin.profile')}}" class="dropdown-item" target="_blank"> <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;{{Auth::user()->name}}</a>
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fa fa-tv" aria-hidden="true"></i>&nbsp; Dashboard</a>

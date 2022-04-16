@@ -12,7 +12,7 @@
             >
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="{{route('admin.dashboard')}}"
+            <a class="navbar-brand" href="./"
             ><img src="{{asset('backend/images/logo.png')}}" alt="Logo"
                 /></a>
             <a class="navbar-brand hidden" href="./"
@@ -21,7 +21,7 @@
         </div>
 
         <div id="main-menu" class="main-menu collapse navbar-collapse">
-
+            @if (Auth::user()->role_id==1)
                 <ul class="nav navbar-nav">
                     <li class="active">
                         <a href="{{route('admin.dashboard')}}">
@@ -33,22 +33,52 @@
                     <!-- /.menu-title -->
                     <li class="active">
                         <a href="{{route('admin.users.index')}}">
-                            <i class="menu-icon fa fa-file"></i>Users
+                            <i class="menu-icon fa fa-user"></i>Users
                         </a>
                     </li>
-                    {{--category--}}
                     <li class="active">
                         <a href="{{route('admin.category.index')}}">
-                            <i class="menu-icon fa fa-file"></i>Category
+                            <i class="menu-icon fa fa-file"></i>Categories
                         </a>
                     </li>
-                    {{--post--}}
                     <li class="active">
                         <a href="{{route('admin.post.index')}}">
-                            <i class="menu-icon fa fa-file"></i>Post
+                            <i class="menu-icon fa fa-file"></i>Posts
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{route('admin.comment.index')}}">
+                            <i class="menu-icon fa fa-file"></i>Comments
+                        </a>
+                    </li>
+{{--                    <li class="active">--}}
+{{--                        <a href="{{route('admin.reply-comment.index')}}">--}}
+{{--                            <i class="menu-icon fa fa-file"></i>Replied Comments--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+                </ul>
+            @else
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="{{route('user.dashboard')}}">
+                            <i class="menu-icon fa fa-dashboard"></i
+                            >Dashboard
+                        </a>
+                    </li>
+                    <h3 class="menu-title">CMS</h3>
+                    <!-- /.menu-title -->
+                    <li class="active">
+                        <a href="{{route('user.comment.index')}}">
+                            <i class="menu-icon fa fa-file"></i>Comments
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{route('user.reply-comment.index')}}">
+                            <i class="menu-icon fa fa-file"></i>Replied Comments
                         </a>
                     </li>
                 </ul>
+            @endif
         </div>
         <!-- /.navbar-collapse -->
     </nav>
