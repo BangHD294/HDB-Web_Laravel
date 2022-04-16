@@ -31,10 +31,14 @@ Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->n
 Route::get('/tag/{name}', [App\Http\Controllers\HomeController::class, 'tagPosts'])->name('tag.posts');
 Route::get('/comment/{post}', [App\Http\Controllers\HomeController::class, 'store'])->name('comment.store');
 
+//Route::post('/comment-reply/{comment}', [App\Http\Controllers\Admin\CommentReplyController::class, 'store'])->name('reply.store');
+//Route::post('/comment-reply/{comment}', [App\Http\Controllers\Admin\CommentReplyController::class, 'store'])->name('reply.store');
+
 //
-////Route::post('/comment/{post}', 'CommentController@store')->name('comment.store')->middleware(['auth', 'verified']);
 //Route::post('/comment/{post}', 'CommentController@store')->name('comment.store')->middleware(['auth']);
+
 ////Route::post('/comment-reply/{comment}', 'CommentReplyController@store')->name('reply.store')->middleware(['auth', 'verified']);
+///
 //Route::post('/comment-reply/{comment}', 'CommentReplyController@store')->name('reply.store')->middleware(['auth']);
 ////Route::post('/like-post/{post}', 'HomeController@likePost')->name('post.like')->middleware(['auth', 'verified']);
 //Route::post('/like-post/{post}', 'HomeController@likePost')->name('post.like')->middleware(['auth']);
@@ -50,6 +54,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', '
     Route::resource('users', UserController::class)->except(['create', 'show', 'edit', 'store']);
     Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class)->except(['create', 'show', 'edit']);
     Route::resource('post', \App\Http\Controllers\Admin\PostController::class);
+    Route::get('/comments', [App\Http\Controllers\Admin\CommentController::class, 'index'])->name('comment.index');
+    Route::delete('/comment/{id}', [App\Http\Controllers\Admin\CommentController::class, 'destroy'])->name('comment.destroy');
+//    Route::get('/comments', 'CommentController@index')->name('comment.index');
+//    Route::delete('/comment/{id}', 'CommentController@destroy')->name('comment.destroy');
+//    Route::get('/reply-comments', 'CommentReplyController@index')->name('reply-comment.index');
+//    Route::delete('/reply-comment/{id}', 'CommentReplyController@destroy')->name('reply-comment.destroy');
 
 });
 
@@ -57,6 +67,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', '
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth', 'user']], function () {
 
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('comments', [App\Http\Controllers\User\CommentController::class, 'index'])->name('comments');
 
 });
 

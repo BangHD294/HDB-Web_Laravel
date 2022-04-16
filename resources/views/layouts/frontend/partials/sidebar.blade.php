@@ -23,8 +23,7 @@
         <ul>
             @foreach ($categories as $category)
                 <li>
-{{--                    <a href="{{route('category.post', $category->slug)}}">{{$category->name}} <span>{{$category->posts->count()}}</span></a>--}}
-                    <a href="{{route('category.post', $category->slug)}}">{{$category->name}} <span></span></a>
+                    <a href="{{route('category.post', $category->slug)}}">{{$category->name}} <span>{{$category->posts->count()}}</span></a>
                 </li>
             @endforeach
         </ul>
@@ -57,8 +56,7 @@
         <h4 class="text-uppercase pb-20">Tag Clouds</h4>
         <ul>
             @foreach ($recentTags->unique('name')->take(10) as $recentTag)
-{{--                <li><a href="{{route('tag.posts', $recentTag->name)}}">{{$recentTag->name}}</a></li>--}}
-                <li><a href="">{{$recentTag->name}}</a></li>
+                <li><a href="{{route('tag.posts', $recentTag->name)}}">{{$recentTag->name}}</a></li>
             @endforeach
         </ul>
     </div>
