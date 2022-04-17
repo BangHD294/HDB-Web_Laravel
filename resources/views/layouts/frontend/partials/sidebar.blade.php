@@ -23,7 +23,8 @@
         <ul>
             @foreach ($categories as $category)
                 <li>
-                    <a href="{{route('category.post', $category->slug)}}">{{$category->name}} <span>{{$category->posts->count()}}</span></a>
+{{--                    <a href="{{route('category.post', $category->slug)}}">{{$category->name}} <span>{{$category->posts->count()}}</span></a>--}}
+                    <a href="{{route('category.post', $category->slug)}}">{{$category->name}} <span></span></a>
                 </li>
             @endforeach
         </ul>

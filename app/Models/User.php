@@ -56,12 +56,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-//    public function replies(){
-//        return $this->hasMany('App\CommentReply');
-//    }
-//    // Many to many
-//    public function likedPosts()
-//    {
-//        return $this->belongsToMany('App\Post')->withTimestamps();
-//    }
+    public function replies(){
+        return $this->hasMany(CommentReply::class);
+    }
+    public function likedPosts()
+    {
+        return $this->belongsToMany(Post::class)->withTimestamps();
+    }
 }

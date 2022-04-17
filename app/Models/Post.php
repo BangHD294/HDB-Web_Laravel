@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Egulias\EmailValidator\Warning\Comment;
+//use Egulias\EmailValidator\Warning\Comment;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

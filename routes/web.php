@@ -29,22 +29,11 @@ Route::get('/categories', [App\Http\Controllers\HomeController::class, 'categori
 Route::get('/category/{slug}', [App\Http\Controllers\HomeController::class, 'categoryPost'])->name('category.post');
 Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->name('search');
 Route::get('/tag/{name}', [App\Http\Controllers\HomeController::class, 'tagPosts'])->name('tag.posts');
-Route::get('/comment/{post}', [App\Http\Controllers\HomeController::class, 'store'])->name('comment.store');
-Route::get('/comment-reply/{comment}', [App\Http\Controllers\CommentReplyController::class, 'store'])->name('reply.store');
+Route::post('/comment/{post}', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store')->middleware('auth');
+Route::post('/comment-reply/{comment}', [App\Http\Controllers\CommentReplyController::class, 'store'])->name('reply.store');
+Route::post('/like-post/{post}', [App\Http\Controllers\HomeController::class, 'likePost'])->name('post.like')->middleware('auth');
 
-//Route::post('/comment-reply/{comment}', [App\Http\Controllers\Admin\CommentReplyController::class, 'store'])->name('reply.store');
-
-//
-//Route::post('/comment/{post}', 'CommentController@store')->name('comment.store')->middleware(['auth']);
-
-////Route::post('/comment-reply/{comment}', 'CommentReplyController@store')->name('reply.store')->middleware(['auth', 'verified']);
-///
-//Route::post('/comment-reply/{comment}', 'CommentReplyController@store')->name('reply.store')->middleware(['auth']);
-////Route::post('/like-post/{post}', 'HomeController@likePost')->name('post.like')->middleware(['auth', 'verified']);
-//Route::post('/like-post/{post}', 'HomeController@likePost')->name('post.like')->middleware(['auth']);
-//
-//Route::post('/comment-reply/{comment}', [App\Http\Controllers\Admin\CommentReplyController::class, 'store'])->name('reply.store');
-
+//test
 //route admin______________________________________________
 Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', 'admin']], function () {
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
@@ -58,26 +47,22 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', '
     Route::delete('/comment/{id}', [App\Http\Controllers\Admin\CommentController::class, 'destroy'])->name('comment.destroy');
     Route::get('/reply-comments', [App\Http\Controllers\Admin\CommentReplyController::class, 'index'])->name('reply-comment.index');
     Route::delete('/reply-comment/{id}', [App\Http\Controllers\CommentReplyController::class, 'destroy'])->name('comment-reply.destroy');
+    Route::get('/post-liked-users/{post}', [App\Http\Controllers\Admin\PostController::class, 'likedUsers'])->name('post.like.users');
 });
 
 //route user_______________________________________________
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth', 'user']], function () {
-
-    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('comments', [App\Http\Controllers\User\CommentController::class, 'index'])->name('comments');
-    Route::delete('/comment/{id}', [App\Http\Controllers\User\CommentController::class, 'destroy'])->name('comment.destroy');
-    Route::get('/reply-comments', [App\Http\Controllers\User\CommentReplyController::class, 'destroy'])->name('comment.destroy');
-    Route::get('profile', [App\Http\Controllers\User\DashboardController::class, 'showProfile'])->name('profile');
-
 //    test
     Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'likedPosts'])->name('dashboard');
+    Route::get('profile', [App\Http\Controllers\User\DashboardController::class, 'showProfile'])->name('profile');
     Route::put('profile', [App\Http\Controllers\User\DashboardController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [App\Http\Controllers\User\DashboardController::class, 'changePassword'])->name('profile.password');
-    Route::get('comments', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('comment.index');
-    Route::delete('/comment/{id}', [App\Http\Controllers\User\DashboardController::class, 'destroy'])->name('comment.destroy');
-    Route::get('/reply-comments', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('reply-comment.index');
-    Route::delete('/reply-comment/{id}', [App\Http\Controllers\User\DashboardController::class, 'destroy'])->name('reply-comment.destroy');
+    Route::get('comments', [App\Http\Controllers\User\CommentController::class, 'index'])->name('comment.index');
+    Route::delete('/comment/{id}', [App\Http\Controllers\User\CommentController::class, 'destroy'])->name('comment.destroy');
+    Route::get('/reply-comments', [App\Http\Controllers\User\CommentReplyController::class, 'index'])->name('reply-comment.index');
+    Route::delete('/reply-comment/{id}', [App\Http\Controllers\User\CommentReplyController::class, 'destroy'])->name('reply-comment.destroy');
     Route::get('/user-liked-posts', [App\Http\Controllers\User\DashboardController::class, 'likedPosts'])->name('like.posts');
+
 });
 
 View::composer('layouts.frontend.partials.sidebar', function ($view) {
