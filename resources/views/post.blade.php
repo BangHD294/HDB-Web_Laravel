@@ -70,7 +70,7 @@
                   @else
                   <a href="#" onclick="document.getElementById('like-form-{{$post->id}}').submit();"> <i class="fa fa-heart" aria-hidden="true" style="color: {{Auth::user()->likedPosts()->where('post_id', $post->id)->count() > 0 ? 'red' : ''}}"></i></a>
                       {{$post->likedUsers->count()}} people like this
-                  
+
                       <form action="{{route('post.like',$post->id)}}" method="POST" style="display: none" id="like-form-{{$post->id}}">
                       @csrf
                       </form>
@@ -90,11 +90,11 @@
                    </div>
                   <div class="col-lg-6 single-b-wrap col-md-12 mt-3" id="social-links">
                     <ul class="social-icons">
-                      <li> 
+                      <li>
                         <a href="#" id="gmail-btn"
                           ><i class="fa fa-envelope-o" aria-hidden="true" style="color: #cf3e39; font-size: 2rem"></i></a>
                       </li>
-                      <li> 
+                      <li>
                         <a href="#" id="facebook-btn"
                           ><i class="fa fa-facebook-square" aria-hidden="true" style="color: #3b5998; font-size: 2rem"></i></a>
                       </li>
@@ -303,7 +303,7 @@
     whatsappBtn.setAttribute("href",`https://wa.me/?text=${postTitle} ${postUrl}`);
     gmailBtn.setAttribute("href",`https://mail.google.com/mail/?view=cm&su=${postTitle}&body=${postUrl}`);
     gplusBtn.setAttribute("href",`https://plus.google.com/share?url=${postUrl}`);
-    
+
     // Button
     const shareBtn = document.getElementById('shareBtn');
     if(navigator.share){

@@ -51,11 +51,11 @@
                             <i class="menu-icon fa fa-file"></i>Comments
                         </a>
                     </li>
-{{--                    <li class="active">--}}
-{{--                        <a href="{{route('admin.reply-comment.index')}}">--}}
-{{--                            <i class="menu-icon fa fa-file"></i>Replied Comments--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    <li class="active">
+                        <a href="{{route('admin.reply-comment.index')}}">
+                            <i class="menu-icon fa fa-file"></i>Replied Comments
+                        </a>
+                    </li>
                 </ul>
             @else
                 <ul class="nav navbar-nav">
@@ -67,16 +67,16 @@
                     </li>
                     <h3 class="menu-title">CMS</h3>
                     <!-- /.menu-title -->
-                    <li class="active">
-                        <a href="{{route('user.comment.index')}}">
-                            <i class="menu-icon fa fa-file"></i>Comments
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="{{route('user.reply-comment.index')}}">
-                            <i class="menu-icon fa fa-file"></i>Replied Comments
-                        </a>
-                    </li>
+{{--                    <li class="active">--}}
+{{--                        <a href="{{route('user.comment.index')}}">--}}
+{{--                            <i class="menu-icon fa fa-file"></i>Comments--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="active">--}}
+{{--                        <a href="{{route('user.reply-comment.index')}}">--}}
+{{--                            <i class="menu-icon fa fa-file"></i>Replied Comments--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                 </ul>
             @endif
         </div>
