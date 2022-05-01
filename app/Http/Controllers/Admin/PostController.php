@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewPost;
 use App\Models\Category;
 use App\Models\Post;
 use App\Notifications\NewPostNotify;
@@ -11,6 +12,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -43,7 +45,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -83,13 +85,15 @@ class PostController extends Controller
         $post->save();
 
         // Notification by mail
-        if($post->status){
+        if ($post->status) {
             $users = User::all();
-            foreach($users as $user){
-                // Mail::to($user->email)->queue(new NewPost($post));
+            foreach ($users as $user) {
+//                 Mail::to($user->email)->queue(new NewPost($post));
+                Mail::to($user->email)->queue(new NewPost($post));
+//                Mail::to($user->email)->queue(new NewPost($post));
                 // Use notification to notify
-                Notification::route('mail', $user->email)
-                    ->notify(new NewPostNotify($post));
+//                Notification::route('mail', $user->email)
+//                    ->notify(new NewPostNotify($post));
             }
         }
         $tags = [];
@@ -107,7 +111,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -119,7 +123,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -132,8 +136,8 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -191,13 +195,13 @@ class PostController extends Controller
         }
         $post->save();
         // Notification by mail
-        if($post->status){
+        if ($post->status) {
             $users = User::all();
-            foreach($users as $user){
-                // Mail::to($user->email)->queue(new NewPost($post));
+            foreach ($users as $user) {
+                Mail::to($user->email)->queue(new NewPost($post));
                 // Use Notification
-                Notification::route('mail', $user->email)
-                    ->notify(new NewPostNotify($post));
+//                Notification::route('mail', $user->email)
+//                    ->notify(new NewPostNotify($post));
             }
         }
         // delete old tags
@@ -216,7 +220,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -234,8 +238,10 @@ class PostController extends Controller
 
         return redirect()->route('admin.post.index');
     }
-    public function likedUsers($post){
+
+    public function likedUsers($post)
+    {
         $post = Post::findOrFail($post);
-        return view('admin.post.likedUsers',compact('post'));
+        return view('admin.post.likedUsers', compact('post'));
     }
 }

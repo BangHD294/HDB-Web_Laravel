@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Post;
+use Laravel\Socialite\Facades\Socialite;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,19 @@ use App\Models\Post;
 //});
 
 Auth::routes();
+//
+//social login
+//Route::get('/auth/redirect', function () {
+//    return Socialite::driver('google')->redirect();
+//});
+//
+//Route::get('/auth/callback', function () {
+//    $user = Socialite::driver('google')->user();
+//    // $user->token
+//});
+Route::get('login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider']);
+Route::get('login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback']);
+//
 //Route::get('/', 'HomeController@index')->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/posts', [App\Http\Controllers\HomeController::class, 'posts'])->name('posts');
@@ -71,6 +85,17 @@ View::composer('layouts.frontend.partials.sidebar', function ($view) {
     $recentPosts = Post::latest()->take(3)->get();
     return $view->with('categories', $categories)->with('recentPosts', $recentPosts)->with('recentTags', $recentTags);
 });
+// Send Mail
+Route::get('/send', function(){
+    $post = Post::findOrFail(7);
+    // Send Mail
+
+//    Mail::to('user@user.com')
+//        ->queue(new NewPost($post));
+    Mail::to('user@user.com')->queue(new \App\Mail\NewPost($post));
+    return (new App\Mail\NewPost($post))->render();
+});
+
 
 
 

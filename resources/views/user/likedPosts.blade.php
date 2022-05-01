@@ -63,16 +63,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-{{--                                        @foreach (Auth::user()->likedPosts as $key => $post)--}}
-{{--                                        <tr>--}}
-{{--                                            <td>{{$key+1}}</td>--}}
-{{--                                        <td><a href="{{route('post', $post->slug)}}">{{$post->title}}</a></td>--}}
-{{--                                            <td>{{$post->category->name}}</td>--}}
-{{--                                            <td><button class="btn btn-danger" type="button"> <i class="fa fa-heart"></i> {{$post->likedUsers->count()}}</button> <button class="btn btn-info" type="button"><i class="fa fa-eye"></i> {{$post->view_count}}</button></td>--}}
-{{--                                            <td>{{$post->created_at->diffForHumans()}}</td>--}}
-{{--                                            --}}
-{{--                                        </tr>--}}
-{{--                                        @endforeach--}}
+                                        @foreach (Auth::user()->likedPosts as $key => $post)
+                                        <tr>
+                                            <td>{{$key+1}}</td>
+                                        <td><a href="{{route('post', $post->slug)}}">{{$post->title}}</a></td>
+                                            <td>{{$post->category->name}}</td>
+                                            <td><button class="btn btn-danger" type="button"> <i class="fa fa-heart"></i> {{$post->likedUsers->count()}}</button> <button class="btn btn-info" type="button"><i class="fa fa-eye"></i> {{$post->view_count}}</button></td>
+                                            <td>{{$post->created_at->diffForHumans()}}</td>
+
+                                        </tr>
+                                        @endforeach
 
                                     </tbody>
                                 </table>

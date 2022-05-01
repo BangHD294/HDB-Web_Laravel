@@ -70,8 +70,8 @@
                                             <td>{{$key+1}}</td>
                                             <td>{{$post->title}}</td>
                                             <td>{{$post->slug}}</td>
-{{--                                        <td><a href="{{route('admin.post.like.users', $post->id)}}" class="btn btn-danger" type="button"> <i class="fa fa-heart"></i> {{$post->likedUsers->count()}}</a> <button class="btn btn-info" type="button"><i class="fa fa-eye"></i> {{$post->view_count}}</button></td>--}}
-                                        <td><a href="" class="btn btn-danger" type="button"> <i class="fa fa-heart"></i> </a> <button class="btn btn-info" type="button"><i class="fa fa-eye"></i> </button></td>
+                                        <td><a href="{{route('admin.post.like.users', $post->id)}}" class="btn btn-danger" type="button"> <i class="fa fa-heart"></i> {{$post->likedUsers->count()}}</a> <button class="btn btn-info" type="button"><i class="fa fa-eye"></i> {{$post->view_count}}</button></td>
+{{--                                        <td><a href="" class="btn btn-danger" type="button"> <i class="fa fa-heart"></i> </a> <button class="btn btn-info" type="button"><i class="fa fa-eye"></i> </button></td>--}}
                                             <td>{{$post->created_at}}</td>
                                             <td>
                                                 <!-- Button trigger modal -->
