@@ -38,6 +38,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
     public function redirectToProvider()
     {
         return Socialite::driver('google')->redirect();
@@ -50,7 +51,8 @@ class LoginController extends Controller
      */
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('google')->user();
+//        $user = Socialite::driver('google')->user();
+        $user = Socialite::driver('google')->stateless()->user();
         dd($user);
         return $user->token;
     }
