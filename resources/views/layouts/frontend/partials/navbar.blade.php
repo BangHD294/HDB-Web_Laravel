@@ -22,7 +22,6 @@
                                     <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;
                                 </a>
                                 <div class="dropdown-menu menu1" style="display: none" id="dropMenu">
-<!--                                    --><?php //dd(Auth::user()->role->id == 1) ?>
                                     @if (Auth::user()->role->id == 1)
                                         <a href="{{route('admin.profile')}}" class="dropdown-item" target="_blank"> <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;{{Auth::user()->name}}</a>
                                         <a class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fa fa-tv" aria-hidden="true"></i>&nbsp; Dashboard</a>

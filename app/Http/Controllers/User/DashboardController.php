@@ -28,7 +28,6 @@ class DashboardController extends Controller
     }
     public function updateProfile(Request $request)
     {
-        // Fix the update issue
         if ($request->name == User::findOrFail(Auth::id())->name) {
             $this->validate($request, [
                 'name' => 'required',
@@ -48,7 +47,6 @@ class DashboardController extends Controller
         }
         $user = User::findOrFail(Auth::user()->id);
         if ($request->image != null) {
-            // Image
             $image = $request->image;
             $imageName = Str::slug($request->name, '-') . uniqid() . '.' . $image->getClientOriginalExtension();
 
@@ -59,8 +57,6 @@ class DashboardController extends Controller
             if ($user->image !== 'default.jpg' && Storage::disk('public')->exists('user/' . $user->image)) {
                 Storage::disk('public')->delete('user/' . $user->image);
             }
-            // Store
-            // $image->storeAs('user', $imageName, 'public');
             $userImg = Image::make($image)->fit(200, 200)->stream();
             Storage::disk('public')->put('user/' . $imageName, $userImg); //The put method may be used to store raw file contents on a disk
         } else {

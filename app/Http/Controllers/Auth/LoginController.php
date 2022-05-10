@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+//use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -53,7 +58,26 @@ class LoginController extends Controller
     {
 //        $user = Socialite::driver('google')->user();
         $user = Socialite::driver('google')->stateless()->user();
-        dd($user);
-        return $user->token;
+//        return $user->token;
+
+        // Find User
+        $authUser = User::where('email', $user->email)->first();
+        if($authUser){
+            Auth::login($authUser);
+            return redirect()->route('home');
+        }
+        else{
+            $newUser = new User();
+            $newUser->email = $user->email;
+            $newUser->name = $user->name;
+            $newUser->email_verified_at = Date::now();
+            $newUser->userid = $user->id;
+            $newUser->password = uniqid().Str::random(10); // we dont need password for login. For random number we user Str::random()
+            $newUser->save();
+
+            // Login
+            Auth::login($newUser);
+            return redirect()->route('home');
+        }
     }
 }
