@@ -84,6 +84,7 @@
                   <i class="fa fa-comment-o" aria-hidden="true"></i> {{$post->comments->count()}}
                   comments
                 </div>
+
                 <div class="row mx-1">
                   <div class="col-lg-6 single-b-wrap col-md-12 pt-4">
                     <h5>Share it on your social media account.</h5>

@@ -21,7 +21,7 @@ use Laravel\Socialite\Facades\Socialite;
 //    return view('welcome');
 //});
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 //
 //social login
 //Route::get('/auth/redirect', function () {
@@ -43,9 +43,9 @@ Route::get('/categories', [App\Http\Controllers\HomeController::class, 'categori
 Route::get('/category/{slug}', [App\Http\Controllers\HomeController::class, 'categoryPost'])->name('category.post');
 Route::get('/search', [App\Http\Controllers\HomeController::class, 'search'])->name('search');
 Route::get('/tag/{name}', [App\Http\Controllers\HomeController::class, 'tagPosts'])->name('tag.posts');
-Route::post('/comment/{post}', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store')->middleware('auth');
+Route::post('/comment/{post}', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store')->middleware(['auth', 'verified']);
 Route::post('/comment-reply/{comment}', [App\Http\Controllers\CommentReplyController::class, 'store'])->name('reply.store');
-Route::post('/like-post/{post}', [App\Http\Controllers\HomeController::class, 'likePost'])->name('post.like')->middleware('auth');
+Route::post('/like-post/{post}', [App\Http\Controllers\HomeController::class, 'likePost'])->name('post.like')->middleware(['auth','verified']);
 
 //test
 //route admin______________________________________________
@@ -65,7 +65,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.',  'middleware' => ['auth', '
 });
 
 //route user_______________________________________________
-Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth', 'user']], function () {
+Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => ['auth', 'user', 'verified']], function () {
 //    test
     Route::get('dashboard', [App\Http\Controllers\User\DashboardController::class, 'likedPosts'])->name('dashboard');
     Route::get('profile', [App\Http\Controllers\User\DashboardController::class, 'showProfile'])->name('profile');

@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+//use App\Category;
+use App\Models\Category;
+//use App\Comment;
+use App\Models\Comment;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Post;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +20,11 @@ use Intervention\Image\Facades\Image;
 class DashboardController extends Controller
 {
     public function index(){
-        return view('admin.index');
+        $posts = Post::all();
+        $comments = Comment::latest()->get();
+        $categories = Category::all();
+        $users = User::all();
+        return view('admin.index', compact('posts', 'comments', 'users', 'categories'));
     }
 
 //    public function showProfile() {
